@@ -1,0 +1,383 @@
+<!-- footer -->
+<Navbar fixed = "bottom" bg="dark" variant="dark">
+    <Container>
+        <Col lg={12} className="text-center text-muted">
+            <div>{fullyear}-{fullyear+1}, All Rights Reserverd by Roman Volchuk & Mateusz Kalksztejn</div>
+        </Col>
+    </Container>
+</Navbar>
+<!-- navbar -->
+<Navbar bg = "dark" variant="dark">
+    <Nav className="mr-auto">
+    <Link to={"addUser"}className= "nav-link">Register User</Link>
+    <Link to={"addDelegation"}className= "nav-link">Register Delegation</Link>
+    <Link to={"listUsers"}className= "nav-link">List Users</Link>
+    <Link to={"listDelegations"}className= "nav-link">List Delegations</Link>
+    <Link to={"changePass"}className= "nav-link">Change Password</Link>
+    </Nav>
+</Navbar>
+<!-- create User -->
+<div style={mystyle}>
+    <div style={{"display":this.state.show ? "block" : "none"}}>
+        <MyToast show={this.state.show} message={this.state.userId ?"User Updated Successfully." :"User Saved Successfully." }type={"success"}/>
+    </div>
+    <Card className={"border border-dark bg-dark text-white"}>
+    <Card.Header><FontAwesomeIcon icon= {this.state.userId ? faEdit : faPlusSquare}/>{this.state.userId ? "Save User": "Registration"}</Card.Header>   
+        <Form onReset={this.resetUser} onSubmit={this.sumbitUser} id = "zadanieFormId">
+            <Card.Body>
+                 <Form.Row>
+                    <Form.Group as={Col}controlId="formGridDateOfCreate">
+                        <Form.Label>Company Name</Form.Label>
+                        <Form.Control required autoComplete="off"
+                            type="text"
+                            name = "companyName"
+                            value={companyName}
+                            onChange={this.userChange}
+                            className={"bg-dark text-white"}
+                            placeholder="Company Name"/>
+                    </Form.Group>
+                    <Form.Group as={Col}controlId="formGridDateOfImplementation">
+                        <Form.Label>Company Address</Form.Label>
+                        <Form.Control required autoComplete="off"
+                            type="text"
+                            name = "companyAddress"
+                            value={companyAddress}
+                            onChange={this.userChange}
+                            className={"bg-dark text-white"}
+                            placeholder="Company Address"/>
+                     </Form.Group>
+                     <Form.Group as={Col}controlId="formGridDateOfImplementation">
+                        <Form.Label>Company NIP</Form.Label>
+                        <Form.Control required autoComplete="off"
+                            type="text"
+                            name = "companyNip"
+                            value={companyNip}
+                            pattern="^[0-9]{10}$"
+                            onChange={this.userChange}
+                            className={"bg-dark text-white"}
+                            placeholder="Company NIP"/>
+                     </Form.Group>
+                     <Form.Group as={Col}controlId="formGridDateOfImplementation">
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control required autoComplete="off"
+                            type="text"
+                            name = "name"
+                            value={name}
+                            onChange={this.userChange}
+                            className={"bg-dark text-white"}
+                            placeholder="Name"/>
+                     </Form.Group>
+                     <Form.Group as={Col}controlId="formGridDateOfImplementation">
+                        <Form.Label>Last Name</Form.Label>
+                        <Form.Control required autoComplete="off"
+                            type="text"
+                            name = "lastName"
+                            value={lastName}
+                            onChange={this.userChange}
+                            className={"bg-dark text-white"}
+                            placeholder="Last Name"/>
+                     </Form.Group>
+                     <Form.Group as={Col}controlId="formGridDateOfImplementation">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control required autoComplete="off"
+                            type="text"
+                            name = "email"
+                            value={email}
+                            pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+                            onChange={this.userChange}
+                            className={"bg-dark text-white"}
+                            placeholder="Email"/>
+                     </Form.Group>
+                     <Form.Group as={Col}controlId="formGridDateOfImplementation">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control required autoComplete="off"
+                            type="text"
+                            name = "password"
+                            value={password }
+                            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                            onChange={this.userChange}
+                            className={"bg-dark text-white"}
+                            placeholder="Password"/>
+                     </Form.Group>
+                 </Form.Row>         
+             </Card.Body>
+        <Card.Footer style={{"textAlign":"right"}}>
+        <Button size="sm" variant ="success" type = "submit">
+            <FontAwesomeIcon icon= {faSave}/> {this.state.sutdentId ? "Save": "Save"}
+            </Button>{' '}
+            <Button size="sm" variant ="info" type = "reset">
+                <FontAwesomeIcon icon= {faUndo}/> Reset
+            </Button>
+            {' '}
+            <Button size="sm" variant ="info" type = "button"onClick={this.usersList.bind()}>
+                <FontAwesomeIcon icon= {faList}/> User List
+            </Button>
+           
+        </Card.Footer>
+    </Form>
+</Card>
+</div>
+<!-- List User -->
+<div style={mystyle}>
+    <div style={{"display":this.state.show ? "block" : "none"}}>
+       <MyToast show={this.state.show} message={"User Deleted Successfully."}type={"danger"}/>
+   </div>
+   <Card className={"border border-dark bg-dark text-white"}>
+   <Card.Header>
+       <div style={{"float":"left"}}>
+       <FontAwesomeIcon icon= {faUser}/> User List
+       </div>
+       <div style={{"float":"right"}}>
+           <InputGroup size="sm">
+               <FormControl placeholder="Search" name = "search" className={" bg-dark text-white"}
+                style={infoBorder}
+               onChange={this.onChange}/>
+               <InputGroup.Append>
+               <Button size="sm" variant="outline-danger" type="button" onClick={this.cancelSearch}>
+               <FontAwesomeIcon icon= {faTimes}/>
+                   </Button>
+               </InputGroup.Append>
+       </InputGroup>
+       </div>
+      </Card.Header>
+   <Card.Body>
+       <Table bordered hover striped variant="dark">
+           <thead>
+               <tr>
+                   <th>ID</th>
+                   <th>Company Name</th>
+                   <th>Company Address</th>
+                   <th>Company NIP</th>
+                   <th>Name</th>
+                   <th>Last Name</th>
+                   <th>Email</th>
+                   <th>Password</th>
+                   <th>Status</th>
+                   <th>Registration Date</th>
+               </tr>
+           </thead>
+           <tbody>
+           {users.length===0 ?
+               <tr align="center">
+                    <td colSpan ="22"> Users.</td>
+               </tr>:
+              filteredUsers.map((user,index)=>(
+                   <tr key={user.id}>
+                       <td>{user.userId}</td>
+                       <td>{user.companyName}</td>
+                       <td>{user.companyAddress}</td>
+                       <td>{user.companyNip}</td>
+                       <td>{user.name}</td>
+                       <td>{user.lastName}</td>
+                       <td>{user.email}</td>
+                       <td>{user.password}</td>
+                       <td>{user.status.toString()}</td>
+                       <td>{user.registrationDate}</td>
+                      
+                       <td>
+                           <ButtonGroup>
+                               <Link to={"edit/"+user.userId }className= "btn btn-sm btn-outline-primary"><FontAwesomeIcon icon= {faEdit}/></Link>{' '}
+                           </ButtonGroup>
+                       </td>
+                       
+                   </tr>
+               ))
+               
+            }
+           </tbody>
+
+       </Table>
+   </Card.Body>
+   <Card.Footer>
+           <div style={{"float":"left"}}>
+               Showing Page {currentPage} of {totalPages}
+           </div>
+           <div style={{"float":"right"}}>
+               <InputGroup size="sm">
+                   <InputGroup.Prepend>
+                       <Button type="button" variant="outline-info" disabled={currentPage===1 ? true: false}
+                       onClick={this.firstPage}>
+                       <FontAwesomeIcon icon= {faFastBackward}/>  First
+                       </Button>
+                       <Button type="button" variant="outline-info"disabled={currentPage===1 ? true: false}
+                       onClick={this.prevPage}>
+                       <FontAwesomeIcon icon= {faStepBackward}/>  Prev
+                       </Button>
+                   </InputGroup.Prepend>
+                   <FormControl style={pageNumCss} className={"bg-dark"} name ="currentPage" value={currentPage}
+                   onChange={this.changePage}/>
+                   <InputGroup.Append>
+                   <Button type="button" variant="outline-info"disabled={currentPage===totalPages ? true: false}
+                   onClick={this.nextPage}>
+                   <FontAwesomeIcon icon= {faStepForward}/>Next
+                       </Button>
+                       <Button type="button" variant="outline-info"disabled={currentPage===totalPages ? true: false}
+                       onClick={this.lastPage}>
+                       <FontAwesomeIcon icon= {faFastForward}/>Last
+                       </Button>
+                   </InputGroup.Append>
+               </InputGroup>
+           </div>
+   </Card.Footer>
+
+</Card>
+
+</div>
+
+<!-- login Component -->
+<div className="form-group">
+    <label htmlFor="name">Your name</label>
+    <Input
+      type="text"
+      className="form-control"
+      name="name"
+      value={this.state.name}
+      onChange={this.onChangeName}
+      validations={[required]}
+    />
+  </div>
+  <!-- profile Component -->
+  <div className="container">
+    {(this.state.userReady) ?
+    <div>
+    <header className="jumbotron">
+      <h3>
+        <strong>{currentUser.name}</strong> Profile
+      </h3>
+ 
+    <p>
+      <strong>Token:</strong>{" "}
+      {currentUser.accessToken.substring(0, 20)} ...{" "}
+      {currentUser.accessToken.substr(currentUser.accessToken.length - 20)}
+    </p>
+    <p>
+      <strong>Id:</strong>{" "}
+      {currentUser.id}
+    </p>
+    <p>
+      <strong>Email:</strong>{" "}
+      {currentUser.email}
+    </p>
+     <strong>Authorities:</strong>
+    <ul>
+      {currentUser.roles &&
+        currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
+    </ul>
+    </header>
+  </div>: null}
+  </div>
+
+  <!-- Register Component -->
+  <div className="form-group">
+    <label htmlFor="password">Password</label>
+    <Input
+      type="password"
+      className="form-control"
+      name="password"
+      value={this.state.password}
+      onChange={this.onChangePassword}
+       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+      validations={[required, vpassword]}
+    />
+    <!-- App -->
+    <div>
+        <nav className="navbar navbar-expand navbar-dark bg-dark">
+          <Link to={"/"} className="navbar-brand">
+            Home
+          </Link>
+          <div className="navbar-nav mr-auto">
+         
+            {showAdminBoard && (
+              <li className="nav-item">
+                <Link to={"/listUsers"} className="nav-link">
+                  List Users
+                </Link>
+              </li>
+            )}
+             {showAdminBoard && (
+              <li className="nav-item">
+                <Link to={"/listDelegations"} className="nav-link">
+                  List Delegations
+                </Link>
+              </li>
+            )}
+
+            {showAdminBoard && (
+              <li className="nav-item">
+                <Link to={"/addDelegation"} className="nav-link">
+                  Add Delegations
+                </Link>
+              </li>
+            )}
+
+
+              {showAdminBoard && (
+                <li className="nav-item">
+                  <Link to={"/changePass"} className="nav-link">
+                    Change User Password
+                  </Link>
+                </li>
+              )}
+
+
+           
+          </div>
+
+          {currentUser ? (
+            <div className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link to={"/profile"} className="nav-link">
+                  {currentUser.name}
+                </Link>
+              </li>
+              <li className="nav-item">
+                <a href="/login" className="nav-link" onClick={this.logOut}>
+                  Log Out
+                </a>
+              </li>
+            </div>
+          ) : (
+            <div className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link to={"/login"} className="nav-link">
+                  Login
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link to={"/register"} className="nav-link">
+                  Registration
+                </Link>
+              </li>
+
+           
+
+			
+            </div>
+          )}
+
+        </nav>
+
+        <div className="container mt-3">
+          <Switch>
+            <Route exact path={["/", "/home"]} component={Home} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/profile" component={Profile} />
+            <Route path="/user" component={BoardUser} />
+            <Route path="/mod" component={BoardModerator} />
+            <Route path="/admin" component={BoardAdmin} />
+			      <Route path="/addUser" exact component ={User}/>
+			      <Route path="/listUsers" exact component ={UserList}/>
+			      <Route path="/listDelegations" exact component ={DelegationList}/>
+			      <Route path = "/addDelegation" exact component ={Delegation}/>
+			      <Route path = "/changePass" exact component = {ChangePass}/>
+			      <Route path="/edit/:id" exact component ={User}/>
+			      <Route path="/editDelegation/:id" exact component ={Delegation}/>
+
+
+          </Switch>
+		  <Footer/>
+        </div>
+      </div>
+
