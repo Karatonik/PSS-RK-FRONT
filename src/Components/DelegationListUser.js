@@ -140,8 +140,8 @@ class DelegationListUser extends React.Component{
      
         const columnstyle = {      
          
-            height: "80%",
-            width: "80%",
+            height: "500px",
+            width: "1900px",
             marginLeft:"-395px"
         };
       
