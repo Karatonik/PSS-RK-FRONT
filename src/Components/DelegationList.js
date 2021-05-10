@@ -81,7 +81,7 @@ class DelegationList extends React.Component{
 
 
     findAllDelegations(){
-        axios.get("https://pssrk2021-api.herokuapp.com/delegations/orderByDateStartDesc")
+        axios.get(" https://pssrk2021-api.herokuapp.com/delegations/orderByDateStartDesc")
         .then(response=>response.data)
         
         .then((data)=>{
@@ -156,7 +156,7 @@ class DelegationList extends React.Component{
          
             height: "500px",
             width: "1900px",
-            marginLeft:"-320px"
+            marginLeft:"-300px"
         };
       
         const{delegations,currentPage,delegationsPerPage,search}=this.state;

@@ -142,7 +142,7 @@ class DelegationListUser extends React.Component{
          
             height: "500px",
             width: "1900px",
-            marginLeft:"-320px"
+            marginLeft:"-300px"
         };
       
         const{delegations,currentPage,delegationsPerPage,search}=this.state;
@@ -212,7 +212,6 @@ class DelegationListUser extends React.Component{
                                 <th>Other Outlay Price</th>
                                 <th>Confirmation</th>
                                 <th>Finished Edition</th>
-                                <th>Actions</th>
                              
                               
                             </tr>

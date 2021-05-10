@@ -59,7 +59,7 @@ export default class Login extends Component {
       AuthService.login(this.state.name, this.state.password).then(
         () => {
           console.log(localStorage.getItem('status'))
-          if(status ==="true"){
+          if(status===('true')){
             console.log('login');
               this.props.history.push("/profile");
               window.location.reload();

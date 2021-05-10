@@ -4,8 +4,6 @@ import React, { Component } from 'react';
 import GoogleLogin from 'react-google-login';
 import { Redirect } from 'react-router-dom';
 
-
-
 export default class LoginGoogle extends Component {
     state = {
         errorMessage: '',
@@ -24,12 +22,12 @@ export default class LoginGoogle extends Component {
             data.profileObj.familyName &&
             data.profileObj.givenName) {
 
-                const body = {
-                    email: data.profileObj.email,
-                    password: data.accessToken,
-                }
+            const body = {
+                email: data.profileObj.email,
+                password: data.accessToken,
+            }
 
-            axios.post('https://pssrk2021-api.herokuapp.com/api/auth/external/', body).then(
+            axios.post('https://pssrk2021-api.herokuapp.com/auth/external/', body).then(
                 res => {
                     localStorage.setItem("user", JSON.stringify(res.data));
                     localStorage.setItem("status", JSON.stringify(res.data.status));
@@ -70,7 +68,7 @@ export default class LoginGoogle extends Component {
             return <Redirect to ={'/'}/>
         } else {
             googleContent = (<GoogleLogin
-            clientId="903532834240-sdn4ijpr0cksjvv6k5n6hg0skef39d3c.apps.googleusercontent.com"
+            clientId="674430789110-38vkhnf8pr5mo1dh8slita5phh28fnga.apps.googleusercontent.com"
             buttonText="Zaloguj"
             onSuccess={this.handleResponse}
             onFailure={this.handleResponse}

@@ -1,9 +1,16 @@
 import React, {  } from 'react';
-import {Card,Form,Button,Col} from 'react-bootstrap'
+import {Card,Form,Button,Col, Alert} from 'react-bootstrap'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faPlusSquare, faSave,faUndo,faList,faEdit, faAtlas} from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import MyToast from './MyToast';
+import {
+    withGoogleMap,
+    withScriptjs,
+    GoogleMap,
+    DirectionsRenderer
+} from "react-google-maps";
+import form from 'react-validation/build/form';
   
 
 class Delegation extends React.Component{
@@ -105,7 +112,7 @@ class Delegation extends React.Component{
 
     
     findDelegationById = (delegationId)=>{
-        axios.put("https://pssrk2021-api.herokuapp.com/delegations/delegationEdit/"+delegationId)
+        axios.put("http://localhost:8080/delegations/delegationEdit/"+delegationId)
         .then(response=>{
             if(response.data!=null){
                 this.setState({
@@ -151,7 +158,7 @@ delegationList = () =>{
          
             height: "500px",
             width: "1900px",
-            marginLeft:"-320px"
+            marginLeft:"-395px"
         };
         const columnstyle={
            top:"24px"

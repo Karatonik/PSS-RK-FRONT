@@ -66,14 +66,14 @@ class App extends Component {
             {showAdminBoard && (
               <li className="nav-item">
                 <Link to={"/listUsers"} className="nav-link">
-                  List Users(Admin)
+                  List Users
                 </Link>
               </li>
             )}
              {showAdminBoard && (
               <li className="nav-item">
                 <Link to={"/listDelegations"} className="nav-link">
-                  List Delegations(Admin)
+                  List Delegations
                 </Link>
               </li>
             )}
@@ -81,7 +81,7 @@ class App extends Component {
             {showAdminBoard && (
               <li className="nav-item">
                 <Link to={"/addDelegation"} className="nav-link">
-                  Add Delegations(Admin)
+                  Add Delegations
                 </Link>
               </li>
             )}
@@ -90,13 +90,11 @@ class App extends Component {
               {showAdminBoard && (
                 <li className="nav-item">
                   <Link to={"/changePass"} className="nav-link">
-                    Change User Password(Admin)
+                    Change User Password
                   </Link>
                 </li>
               )}
-                
-
-
+              
            
           </div>
 

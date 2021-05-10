@@ -3,9 +3,6 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import FacebookLogin from 'react-facebook-login';
 import { Redirect } from 'react-router-dom';
-
-
-
 export default class LoginFb extends Component {
     state = {
         errorMessage: '',

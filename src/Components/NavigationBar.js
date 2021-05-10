@@ -16,6 +16,7 @@ class NavigationBar extends React.Component{
                 <Link to={"listUsers"}className= "nav-link">List Users</Link>
                 <Link to={"listDelegations"}className= "nav-link">List Delegations</Link>
                 <Link to={"changePass"}className= "nav-link">Change Password</Link>
+                <Link to={"changeAccept"}className= "nav-link">Change Accept Delegation</Link>
                
                 </Nav>
            </Navbar>
