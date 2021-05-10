@@ -64,7 +64,7 @@ export default class LoginGoogle extends Component {
             return <Redirect to ={'/'}/>
         } else {
             googleContent = (<GoogleLogin
-            clientId="674430789110-38vkhnf8pr5mo1dh8slita5phh28fnga.apps.googleusercontent.com"
+            clientId="903532834240-sdn4ijpr0cksjvv6k5n6hg0skef39d3c.apps.googleusercontent.com"
             buttonText="Zaloguj"
             onSuccess={this.handleResponse}
             onFailure={this.handleResponse}
