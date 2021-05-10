@@ -38,7 +38,7 @@ class DelegationListUser extends React.Component{
         
     }
     getPDF=(delegationdId)=>{
-        axios.get("http://localhost:8080/pdf/local/"+delegationdId)
+        axios.get("https://pssrk2021-api.herokuapp.com/pdf/local/"+delegationdId)
         .then(response=>{
             if(response.data!=null){
                 this.setState({});
@@ -53,9 +53,9 @@ class DelegationListUser extends React.Component{
         });
     };
     drukPDF=(delegationdId)=>{
-        axios.get("http://localhost:8080/pdf/"+delegationdId)
+        axios.get("https://pssrk2021-api.herokuapp.com/pdf/"+delegationdId)
         .then(response=>{
-                window.open("http://localhost:8080/pdf/"+delegationdId)
+                window.open("https://pssrk2021-api.herokuapp.com/pdf/"+delegationdId)
                 this.setState({
                    
                 });
@@ -65,7 +65,7 @@ class DelegationListUser extends React.Component{
     };
  
     changeAcceptDel = (delegationId,userId)=>{
-        axios.put("http://localhost:8080/delegations/acc/"+delegationId+"/"+localStorage.getItem('id'))
+        axios.put("https://pssrk2021-api.herokuapp.com/delegations/acc/"+delegationId+"/"+localStorage.getItem('id'))
         .then(response=>{
             if(response.data!=null){
                 this.setState({
@@ -79,7 +79,7 @@ class DelegationListUser extends React.Component{
         });
     }
     chagenFinished = (delegationId)=>{
-        axios.put("http://localhost:8080/delegations/finished/"+delegationId)
+        axios.put("https://pssrk2021-api.herokuapp.com/delegations/finished/"+delegationId)
         .then(response=>{
             if(response.data!=null){
                 this.setState({
@@ -140,8 +140,8 @@ class DelegationListUser extends React.Component{
      
         const columnstyle = {      
          
-            height: "500px",
-            width: "1900px",
+            height: "80%",
+            width: "80%",
             marginLeft:"-395px"
         };
       
@@ -212,6 +212,7 @@ class DelegationListUser extends React.Component{
                                 <th>Other Outlay Price</th>
                                 <th>Confirmation</th>
                                 <th>Finished Edition</th>
+                                <th>Actions</th>
                              
                               
                             </tr>

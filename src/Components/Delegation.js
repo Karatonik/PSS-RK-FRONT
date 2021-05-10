@@ -112,7 +112,7 @@ class Delegation extends React.Component{
 
     
     findDelegationById = (delegationId)=>{
-        axios.put("http://localhost:8080/delegations/delegationEdit/"+delegationId)
+        axios.put("https://pssrk2021-api.herokuapp.com/delegations/delegationEdit/"+delegationId)
         .then(response=>{
             if(response.data!=null){
                 this.setState({
@@ -156,8 +156,8 @@ delegationList = () =>{
 
         const style1 = {      
          
-            height: "500px",
-            width: "1900px",
+            height: "80%",
+            width: "80%",
             marginLeft:"-395px"
         };
         const columnstyle={
