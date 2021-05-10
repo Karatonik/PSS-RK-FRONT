@@ -1,8 +1,8 @@
 {
   "name": "pss-web",
-  "version": "0.1.0",
+  "version": "7.12.0",
   "engines": {
-    "node": "6.11.1"
+    "node": "14.2.0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
