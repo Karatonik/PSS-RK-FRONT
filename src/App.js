@@ -20,7 +20,6 @@ import Delegation from './Components/Delegation';
 import Footer from './Components/Footer';
 import LoginFb from './Components/LoginFb'
 import LoginGoogle from './Components/LoginG';
-import ChangeAcceptDelegation from "./Components/ChangeAcceptDelegation";
 import DelegationListUser from './Components/DelegationListUser';
 
 
@@ -67,14 +66,14 @@ class App extends Component {
             {showAdminBoard && (
               <li className="nav-item">
                 <Link to={"/listUsers"} className="nav-link">
-                  List Users
+                  List Users(Admin)
                 </Link>
               </li>
             )}
              {showAdminBoard && (
               <li className="nav-item">
                 <Link to={"/listDelegations"} className="nav-link">
-                  List Delegations
+                  List Delegations(Admin)
                 </Link>
               </li>
             )}
@@ -82,7 +81,7 @@ class App extends Component {
             {showAdminBoard && (
               <li className="nav-item">
                 <Link to={"/addDelegation"} className="nav-link">
-                  Add Delegations
+                  Add Delegations(Admin)
                 </Link>
               </li>
             )}
@@ -91,17 +90,11 @@ class App extends Component {
               {showAdminBoard && (
                 <li className="nav-item">
                   <Link to={"/changePass"} className="nav-link">
-                    Change User Password
+                    Change User Password(Admin)
                   </Link>
                 </li>
               )}
-                {showAdminBoard && (
-                <li className="nav-item">
-                  <Link to={"/changeAccept"} className="nav-link">
-                    Change Accept Delegation
-                  </Link>
-                </li>
-              )}
+                
 
 
            
@@ -183,7 +176,6 @@ class App extends Component {
 			      <Route path="/editDelegation/:id" exact component ={Delegation}/>
             <Route path = "/loginFb" exact component = {LoginFb}/>
             <Route path = "/loginGoogle" exact component = {LoginGoogle}/>
-            <Route path = "/changeAccept" exact component = {ChangeAcceptDelegation}/>
        
 
           </Switch>

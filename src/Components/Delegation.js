@@ -158,7 +158,7 @@ delegationList = () =>{
          
             height: "500px",
             width: "1900px",
-            marginLeft:"-395px"
+            marginLeft:"-320px"
         };
         const columnstyle={
            top:"24px"

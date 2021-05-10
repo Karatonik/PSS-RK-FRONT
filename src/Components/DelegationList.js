@@ -156,7 +156,7 @@ class DelegationList extends React.Component{
          
             height: "500px",
             width: "1900px",
-            marginLeft:"-395px"
+            marginLeft:"-320px"
         };
       
         const{delegations,currentPage,delegationsPerPage,search}=this.state;
