@@ -44,7 +44,7 @@ class ChangePass extends React.Component{
           
 
         };
-        axios.post("http://localhost:8080/users/changePassword/"+user.userId +"/"+ user.newPassword,user)
+        axios.post("https://pssrk2021-api.herokuapp.com/changePassword/"+user.userId +"/"+ user.newPassword,user)
         .then(response=>{
             if(response.data!=null){
                 this.setState({"show":true});

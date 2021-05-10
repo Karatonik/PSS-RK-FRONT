@@ -66,7 +66,7 @@ class Delegation extends React.Component{
                     
 
         };
-        axios.post("http://localhost:8080/users/setDelegation/"+delegation.user,delegation)
+        axios.post("https://pssrk2021-api.herokuapp.com/users/setDelegation/"+delegation.user,delegation)
         .then(response=>{
             if(response.data!=null){
                
@@ -85,7 +85,7 @@ class Delegation extends React.Component{
     }
    
     findDelegationById = (delegationId)=>{
-        axios.put("http://localhost:8080/delegations/delegationEdit/"+delegationId)
+        axios.put("https://pssrk2021-api.herokuapp.com/delegations/delegationEdit/"+delegationId)
         .then(response=>{
             if(response.data!=null){
                 this.setState({

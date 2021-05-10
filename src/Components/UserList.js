@@ -27,7 +27,7 @@ class UserList extends React.Component{
 
 
     findAllUsers(){
-        axios.get(" http://localhost:8080/users/")
+        axios.get(" https://pssrk2021-api.herokuapp.com/users/")
         .then(response=>response.data)
         .then((data)=>{
             this.setState({users: data})
@@ -36,7 +36,7 @@ class UserList extends React.Component{
       
     }
     deleteUser=(userId)=>{
-        axios.delete("http://localhost:8080/users/deleteUser/"+userId)
+        axios.delete("https://pssrk2021-api.herokuapp.com/users/deleteUser/"+userId)
         .then(response=>{
             if(response.data!=null){
                 this.setState({"show":true});

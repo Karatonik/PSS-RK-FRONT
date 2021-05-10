@@ -24,7 +24,7 @@ class DelegationList extends React.Component{
 
     
     getPDF=(delegationdId)=>{
-        axios.get("http://localhost:8080/pdf/local/"+delegationdId)
+        axios.get("https://pssrk2021-api.herokuapp.com/pdf/local/"+delegationdId)
         .then(response=>{
             if(response.data!=null){
                 this.setState({});
@@ -39,9 +39,9 @@ class DelegationList extends React.Component{
         });
     };
     drukPDF=(delegationdId)=>{
-        axios.get("http://localhost:8080/pdf/"+delegationdId)
+        axios.get("https://pssrk2021-api.herokuapp.com/pdf/"+delegationdId)
         .then(response=>{
-                window.open("http://localhost:8080/pdf/"+delegationdId)
+                window.open("https://pssrk2021-api.herokuapp.com/pdf/"+delegationdId)
                 this.setState({
                    
                 });
@@ -51,7 +51,7 @@ class DelegationList extends React.Component{
     };
  
     changeAcceptDel = (delegationId,userId)=>{
-        axios.put("http://localhost:8080/delegations/acc/"+delegationId+"/"+localStorage.getItem('id'))
+        axios.put("https://pssrk2021-api.herokuapp.com/delegations/acc/"+delegationId+"/"+localStorage.getItem('id'))
         .then(response=>{
             if(response.data!=null){
                 this.setState({
@@ -65,7 +65,7 @@ class DelegationList extends React.Component{
         });
     }
     chagenFinished = (delegationId)=>{
-        axios.put("http://localhost:8080/delegations/finished/"+delegationId)
+        axios.put("https://pssrk2021-api.herokuapp.com/delegations/finished/"+delegationId)
         .then(response=>{
             if(response.data!=null){
                 this.setState({
@@ -81,7 +81,7 @@ class DelegationList extends React.Component{
 
 
     findAllDelegations(){
-        axios.get(" http://localhost:8080/delegations/orderByDateStartDesc")
+        axios.get(" https://pssrk2021-api.herokuapp.com/delegations/orderByDateStartDesc")
         .then(response=>response.data)
         
         .then((data)=>{
@@ -92,7 +92,7 @@ class DelegationList extends React.Component{
         
     }
     deleteDelegation=(delegationdId)=>{
-        axios.delete("http://localhost:8080/delegations/deleteDelegations/"+delegationdId)
+        axios.delete("https://pssrk2021-api.herokuapp.com/delegations/deleteDelegations/"+delegationdId)
         .then(response=>{
             if(response.data!=null){
                 this.setState({"show":true});

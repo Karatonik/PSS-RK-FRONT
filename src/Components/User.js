@@ -47,7 +47,7 @@ class User extends React.Component{
                     
 
         };
-        axios.post("http://localhost:8080/users/register",user)
+        axios.post("https://pssrk2021-api.herokuapp.com/users/register",user)
         .then(response=>{
             if(response.data!=null){
                 this.setState({"show":true});
@@ -60,7 +60,7 @@ class User extends React.Component{
 
     }
     findUserById = (userId)=>{
-        axios.put("http://localhost:8080/users/userEdit/"+userId)
+        axios.put("https://pssrk2021-api.herokuapp.com/users/userEdit/"+userId)
         .then(response=>{
             if(response.data!=null){
                 this.setState({

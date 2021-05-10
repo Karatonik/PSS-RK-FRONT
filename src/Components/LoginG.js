@@ -28,7 +28,7 @@ export default class LoginGoogle extends Component {
                 nick: data.profileObj.givenName + " " + data.profileObj.familyName
             }
 
-            axios.post('http://localhost:8080/api/auth/external/', body).then(
+            axios.post('https://pssrk2021-api.herokuapp.com/api/auth/external/', body).then(
                 res => {
                     localStorage.setItem('token', res.data.token);
                     localStorage.setItem('email', res.data.email);       
