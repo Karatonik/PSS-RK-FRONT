@@ -32,18 +32,12 @@ export default class LoginGoogle extends Component {
                     localStorage.setItem("user", JSON.stringify(res.data));
                     localStorage.setItem("status", JSON.stringify(res.data.status));
                     localStorage.setItem("id", JSON.stringify(res.data.id));
-                    var s =localStorage.getItem('status');
-                    if(s ==="true"){
-                      console.log('login');
-                        this.props.history.push("/profile");
-                        window.location.reload();
-                    }else{
-                      alert('Konto jeszcze nie zostało aktywowane!Sprawdź swoją skrzyńkę pocztową!');
-                    }
                     this.setState({
                         loggedIn: true
                          
                     });
+                    this.props.history.push("/profile");
+                    window.location.reload();
                 }
             ).catch(err => {
                 // snackbar
