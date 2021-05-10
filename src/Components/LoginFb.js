@@ -9,6 +9,7 @@ export default class LoginFb extends Component {
         isLoggedIn: false,
         userId: '',
         name: '',
+        lastName:'',
         email: '',
         picture: ''
     }
@@ -17,21 +18,28 @@ export default class LoginFb extends Component {
         if (data.email && data.userID && data.accessToken && data.name) {
 
             const body = {
-                email: data.userID + data.email,
-                password: data.accessToken,
-                nick: data.name
+                name: data.name.split(" ")[1],
+                last: data.name.split(" ")[2],
+                email:  data.email,
+                password: data.accessToken
             }
 
             axios.post('https://pssrk2021-api.herokuapp.com/api/auth/external/', body).then(
                 res => {
-                    localStorage.setItem('token', res.data.token);
-                    localStorage.setItem('email', res.data.email);       
-                    localStorage.setItem('nick',res.data.nick);
+                    localStorage.setItem("user", JSON.stringify(res.data));
+                    localStorage.setItem("status", JSON.stringify(res.data.status));
+                    localStorage.setItem("id", JSON.stringify(res.data.id));
+                    var s =localStorage.getItem('status');
+                    if(s ==="true"){
+                      console.log('login');
+                        this.props.history.push("/profile");
+                        window.location.reload();
+                    }else{
+                      alert('Konto jeszcze nie zostało aktywowane!Sprawdź swoją skrzyńkę pocztową!');
+                    }
                     this.setState({
                         loggedIn: true
                     });
-                    
-                    window.location.reload();
                 }
             ).catch(err => {
                 // snackbar
