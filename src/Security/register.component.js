@@ -151,6 +151,7 @@ export default class Register extends Component {
             message: response.data.message,
             successful: true
           });
+          console.log(response)
         },
         error => {
           const resMessage =

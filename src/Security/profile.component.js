@@ -9,21 +9,25 @@ export default class Profile extends Component {
     this.state = {
       redirect: null,
       userReady: false,
-      currentUser: {  name: ""
+      currentUser: {  name: "",status:""
     }
     };
   }
 
   componentDidMount() {
     const currentUser = AuthService.getCurrentUser();
+    const currentStatus =  AuthService.getCurrentStatus();
 
     if (!currentUser) this.setState({ redirect: "/home" });
     this.setState({ currentUser: currentUser, userReady: true })
+    console.log(currentUser);
+    console.log(currentStatus +localStorage.getItem('status'))
   }
 
   render() {
     if (this.state.redirect) {
       return <Redirect to={this.state.redirect} />
+     
     }
 
     const { currentUser } = this.state;
@@ -49,6 +53,10 @@ export default class Profile extends Component {
         <p>
           <strong>Email:</strong>{" "}
           {currentUser.email}
+        </p>
+        <p>
+          <strong>Status:</strong>{" "}
+          {currentUser.status}
         </p>
          <strong>Authorities:</strong>
         <ul>

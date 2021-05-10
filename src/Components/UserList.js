@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card,Table,ButtonGroup,Button,InputGroup,FormControl} from 'react-bootstrap'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faEdit,faUser,faFastForward,faStepForward,faFastBackward, faTrash,faTimes,faStepBackward} from '@fortawesome/free-solid-svg-icons';
+import {faEdit,faUser,faFastForward,faStepForward,faFastBackward, faTrash,faTimes,faStepBackward,faCheckCircle} from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import MyToast from './MyToast';
 import {Link} from 'react-router-dom';
@@ -27,7 +27,7 @@ class UserList extends React.Component{
 
 
     findAllUsers(){
-        axios.get(" https://pssrk2021-api.herokuapp.com/users/")
+        axios.get("https://pssrk2021-api.herokuapp.com/users/")
         .then(response=>response.data)
         .then((data)=>{
             this.setState({users: data})
@@ -50,6 +50,22 @@ class UserList extends React.Component{
             }
         });
     };
+
+    setUserAsAdmin = (userId)=>{
+        axios.put("https://pssrk2021-api.herokuapp.com/users/setadmin/"+localStorage.getItem('id')+"/"+userId)
+        .then(response=>{
+            if(response.data!=null){
+                this.setState({
+                    
+                });
+                window.location.reload();
+            }
+            console.log(response)
+        }).catch((error)=>{
+            console.error("Error - " +error);
+        });
+    }
+
     changePage = event=>{
         this.setState({
             [event.target.name]:parseInt(event.target.value)
@@ -182,6 +198,7 @@ class UserList extends React.Component{
                                         <ButtonGroup>
                                             <Link to={"edit/"+user.userId }className= "btn btn-sm btn-outline-primary"><FontAwesomeIcon icon= {faEdit}/></Link>{' '}
                                             <Button size = "sm"variant="outline-danger"onClick={this.deleteUser.bind(this,user.userId)} ><FontAwesomeIcon icon= {faTrash}/></Button>
+                                            <Button size = "sm"variant="outline-success"onClick={this.setUserAsAdmin.bind(this,user.userId,user.userId)} ><FontAwesomeIcon icon={faCheckCircle}/></Button>
                                         </ButtonGroup>
                                     </td>
                                     

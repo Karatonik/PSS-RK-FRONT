@@ -13,28 +13,15 @@ class AuthService {
       .then(response => {
         if (response.data.accessToken) {
           localStorage.setItem("user", JSON.stringify(response.data));
+          localStorage.setItem("status", JSON.stringify(response.data.status));
           localStorage.setItem("id", JSON.stringify(response.data.id));
          
         }
-
+        console.log(response)
         return response.data;
       });
   }
-  loginGoogle(email, name) {
-    return axios
-      .post(API_URL + "/signin/google/", {
-        email,
-        name
-      })
-      .then(response => {
-        if (response.data.accessToken) {
-          localStorage.setItem("user", JSON.stringify(response.data));
-        }
-
-        return response.data;
-      });
-  }
-
+  
   logout() {
     localStorage.removeItem("user");
   }
@@ -53,7 +40,12 @@ class AuthService {
   }
 
   getCurrentUser() {
-    return JSON.parse(localStorage.getItem('user'));;
+    return JSON.parse(localStorage.getItem('user')) ;
+   
+  }
+  getCurrentStatus() {
+    return JSON.parse(localStorage.getItem('status')) ;
+   
   }
 }
 

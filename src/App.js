@@ -21,6 +21,10 @@ import Footer from './Components/Footer';
 import LoginFb from './Components/LoginFb'
 import LoginGoogle from './Components/LoginG';
 import ChangeAcceptDelegation from "./Components/ChangeAcceptDelegation";
+import DelegationListUser from './Components/DelegationListUser';
+
+
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -115,6 +119,18 @@ class App extends Component {
                   Log Out
                 </a>
               </li>
+              <li className="nav-item">
+                <Link to={"/delegationUser"} className="nav-link">
+                  List Delegations
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to={"/addDelegation"} className="nav-link">
+                  Add Delegations
+                </Link>
+              </li>
+
+             
             </div>
           ) : (
             <div className="navbar-nav ml-auto">
@@ -160,6 +176,7 @@ class App extends Component {
 			      <Route path="/addUser" exact component ={User}/>
 			      <Route path="/listUsers" exact component ={UserList}/>
 			      <Route path="/listDelegations" exact component ={DelegationList}/>
+            <Route path="/delegationUser" exact component ={DelegationListUser}/>
 			      <Route path = "/addDelegation" exact component ={Delegation}/>
 			      <Route path = "/changePass" exact component = {ChangePass}/>
 			      <Route path="/edit/:id" exact component ={User}/>
@@ -167,6 +184,7 @@ class App extends Component {
             <Route path = "/loginFb" exact component = {LoginFb}/>
             <Route path = "/loginGoogle" exact component = {LoginGoogle}/>
             <Route path = "/changeAccept" exact component = {ChangeAcceptDelegation}/>
+       
 
           </Switch>
 		  <Footer/>

@@ -1,16 +1,21 @@
 import React, {  } from 'react';
-import {Card,Form,Button,Col} from 'react-bootstrap'
+import {Card,Form,Button,Col, Alert} from 'react-bootstrap'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import { faPlusSquare, faSave,faUndo,faList,faEdit} from '@fortawesome/free-solid-svg-icons';
+import { faPlusSquare, faSave,faUndo,faList,faEdit, faAtlas} from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import MyToast from './MyToast';
-
-
-
-
+import {
+    withGoogleMap,
+    withScriptjs,
+    GoogleMap,
+    DirectionsRenderer
+} from "react-google-maps";
+import form from 'react-validation/build/form';
   
 
 class Delegation extends React.Component{
+
+    
 
 
     constructor(props){
@@ -25,8 +30,9 @@ class Delegation extends React.Component{
     initialState={
         delegationId:"",description:"",dateTimeStart:"",dateTimeStop:"",travelDietAmount:"",breakfastNumber:"",dinnerNumber:"",
         supperNumber:"",transportType:"",ticketPrice:"",autoCapacity:"",km:"",accomodationPrice:"",otherTicketsPrice:"",
-        otherOutlayDesc:"",otherOutlayPrice:"",user:""
+        otherOutlayDesc:"",otherOutlayPrice:"",user:"",fromInput:"",toInput:""
     }
+
     componentDidMount(){
         const delegationId=+this.props.match.params.id;
         if(delegationId){
@@ -79,13 +85,34 @@ class Delegation extends React.Component{
         this.setState(this.initialState);
 
 
-       
-        
-
     }
-   
+     geocode=()=>{
+       
+        const directionsService = new window.google.maps.DirectionsService();
+        directionsService.route(
+            {
+                origin: this.state.fromInput,
+                destination: this.state.toInput,
+                travelMode: "DRIVING"
+            },
+            (result, status) => {
+                if (status === window.google.maps.DirectionsStatus.OK) {
+                    console.log(result.routes[0].legs[0].distance.value);
+                    this.initialState.km =result.routes[0].legs[0].distance.value;
+                    this.setState(this.initialState);
+                
+                   //alert(result.routes[0].legs[0].distance.value + ' km')
+                } else {
+                    console.log('error');
+                }
+            }
+        );
+      }
+
+
+    
     findDelegationById = (delegationId)=>{
-        axios.put("https://pssrk2021-api.herokuapp.com/delegations/delegationEdit/"+delegationId)
+        axios.put("http://localhost:8080/delegations/delegationEdit/"+delegationId)
         .then(response=>{
             if(response.data!=null){
                 this.setState({
@@ -125,7 +152,8 @@ delegationList = () =>{
 
 
     render(){
-        
+   
+
         const style1 = {      
          
             height: "500px",
@@ -136,13 +164,30 @@ delegationList = () =>{
            top:"24px"
             
         }
-       
+        function iframe() {
+            return {
+                __html: '<h1 src="./maps.html" ></h1>'
+            }
+        }
         const{description,dateTimeStop,travelDietAmount,breakfastNumber,dinnerNumber,
         supperNumber,transportType,ticketPrice,autoCapacity,km,accomodationPrice,otherTicketsPrice,
-        otherOutlayDesc,otherOutlayPrice,user}=this.state
+        otherOutlayDesc,otherOutlayPrice,user,fromInput,toInput}=this.state
        
       
         return(
+            
+    
+         <div>
+             <form>
+              <label style={{color:'red'}}>Kalkulator trasy</label>   
+             <input type="text" name = "fromInput" value={fromInput} onChange={this.delegationChange}></input>
+            <input type="text" name = "toInput" value={toInput} onChange={this.delegationChange}></input>
+            <Button size="sm" variant ="info" type = "button"onClick={this.geocode.bind()}>
+                            <FontAwesomeIcon icon= {faAtlas}/> Wyszukaj
+                        </Button>
+             </form>
+        
+        
             <div style={style1}>
                 <div style={{"display":this.state.show ? "block" : "none"}}>
                     <MyToast show={this.state.show} message={this.state.delegationId ?"Delegation Updated Successfully." :"Delegation Saved Successfully." }type={"success"}/>
@@ -258,6 +303,19 @@ delegationList = () =>{
                                         className={"bg-dark text-white"}
                                         placeholder="KM"/>
                                  </Form.Group>
+                                 {/* <Form.Group style={columnstyle} as={Col}controlId="formGridDateOfImplementation">
+                                    <Form.Label>Choose Cities</Form.Label>
+                                    <Form.Control required autoComplete="off"
+                                        type="text"
+                                        name = "km"
+                                        value={km }
+                                        onChange={this.delegationChange}
+                                        className={"bg-dark text-white"}
+                                        placeholder="KM"/>
+                                 </Form.Group> */}
+                                <div>
+                                <div dangerouslySetInnerHTML={iframe()} />
+                                </div>
                                  <Form.Group as={Col}controlId="formGridDateOfImplementation">
                                     <Form.Label>Accomodation Price</Form.Label>
                                     <Form.Control required autoComplete="off"
@@ -325,6 +383,7 @@ delegationList = () =>{
                     </Card.Footer>
                 </Form>
             </Card>
+            </div>
             </div>
             
 

@@ -1,13 +1,13 @@
 import React from 'react';
 import {Card,Table,ButtonGroup,Button,InputGroup,FormControl} from 'react-bootstrap'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faEdit,faTrash,faFastForward,faStepForward,faFastBackward, faFilePdf,faTimes,faStepBackward, faUndo,faList,faPrint,faCheckCircle} from '@fortawesome/free-solid-svg-icons';
+import {faEdit,faFastForward,faStepForward,faFastBackward,faTimes,faStepBackward, faUndo,faList,faPrint} from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import MyToast from './MyToast';
 import {Link} from 'react-router-dom';
 
 
-class DelegationList extends React.Component{
+class DelegationListUser extends React.Component{
     constructor(props){
         super(props);
         this.state ={
@@ -23,8 +23,22 @@ class DelegationList extends React.Component{
     }
 
     
+   
+
+
+    findAllDelegations(){
+        axios.get("https://pssrk2021-api.herokuapp.com/delegations/orderByDateStartDesc")
+        .then(response=>response.data)
+        
+        .then((data)=>{
+            console.log(data)
+            this.setState({delegations: data})
+            
+        });
+        
+    }
     getPDF=(delegationdId)=>{
-        axios.get("https://pssrk2021-api.herokuapp.com/pdf/local/"+delegationdId)
+        axios.get("http://localhost:8080/pdf/local/"+delegationdId)
         .then(response=>{
             if(response.data!=null){
                 this.setState({});
@@ -78,34 +92,6 @@ class DelegationList extends React.Component{
             console.error("Error - " +error);
         });
     }
-
-
-    findAllDelegations(){
-        axios.get(" http://localhost:8080/delegations/orderByDateStartDesc")
-        .then(response=>response.data)
-        
-        .then((data)=>{
-            console.log(data)
-            this.setState({delegations: data})
-            
-        });
-        
-    }
-    deleteDelegation=(delegationdId)=>{
-        axios.delete("http://localhost:8080/delegations/deleteDelegations/"+delegationdId)
-        .then(response=>{
-            if(response.data!=null){
-                this.setState({"show":true});
-                setTimeout(()=>this.setState({"show":false}),3000);
-                this.setState({
-                    delegations:this.state.delegations.filter(delegation => delegation.delegationId !== delegationdId)
-                });
-            }
-            else{
-                this.setState({"show":false});
-            }
-        });
-    };
     changePage = event=>{
         this.setState({
             [event.target.name]:parseInt(event.target.value)
@@ -226,7 +212,7 @@ class DelegationList extends React.Component{
                                 <th>Other Outlay Price</th>
                                 <th>Confirmation</th>
                                 <th>Finished Edition</th>
-                                <th>Actions</th>
+                             
                               
                             </tr>
                         </thead>
@@ -263,10 +249,9 @@ class DelegationList extends React.Component{
                                     <td>
                                         <ButtonGroup>
                                             <Link to={"editDelegation/"+delegation.delegationId }className= "btn btn-sm btn-outline-primary"><FontAwesomeIcon icon= {faEdit}/></Link>{' '}
-                                            <Button size = "sm"variant="outline-danger"onClick={this.deleteDelegation.bind(this,delegation.delegationId)} ><FontAwesomeIcon icon= {faTrash}/></Button>
-                                            <Button size = "sm"variant="outline-info"onClick={this.getPDF.bind(this,delegation.delegationId)} ><FontAwesomeIcon icon={faFilePdf}/></Button>
+                                           
                                             <Button size = "sm"variant="outline-primary"onClick={this.drukPDF.bind(this,delegation.delegationId)} ><FontAwesomeIcon icon={faPrint}/></Button>
-                                            <Button size = "sm"variant="outline-success"onClick={this.changeAcceptDel.bind(this,delegation.delegationId,delegation.userId)} ><FontAwesomeIcon icon={faCheckCircle}/></Button>
+                                           
                                             <Button size = "sm"variant="outline-warning"onClick={this.chagenFinished.bind(this,delegation.delegationId)} ><FontAwesomeIcon icon={faUndo}/></Button>
                                         </ButtonGroup>
                                     </td>
@@ -319,4 +304,4 @@ class DelegationList extends React.Component{
         );
     }
 }
-export default DelegationList;
+export default DelegationListUser;
