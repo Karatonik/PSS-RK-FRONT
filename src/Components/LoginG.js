@@ -23,23 +23,27 @@ export default class LoginGoogle extends Component {
             data.profileObj.givenName) {
 
             const body = {
-                email: data.profileObj.googleId + data.profileObj.email,
+                email: data.profileObj.email,
                 password: data.accessToken,
-                nick: data.profileObj.givenName + " " + data.profileObj.familyName
             }
 
-            axios.post('https://pssrk2021-api.herokuapp.com/api/auth/external/', body).then(
+            axios.post('http://localhost:8080/api/auth/external/', body).then(
                 res => {
-                    localStorage.setItem('token', res.data.token);
-                    localStorage.setItem('email', res.data.email);       
-                    localStorage.setItem('nick',res.data.nick);
-                 
+                    localStorage.setItem("user", JSON.stringify(res.data));
+                    localStorage.setItem("status", JSON.stringify(res.data.status));
+                    localStorage.setItem("id", JSON.stringify(res.data.id));
+                    var s =localStorage.getItem('status');
+                    if(s ==="true"){
+                      console.log('login');
+                        this.props.history.push("/profile");
+                        window.location.reload();
+                    }else{
+                      alert('Konto jeszcze nie zostało aktywowane!Sprawdź swoją skrzyńkę pocztową!');
+                    }
                     this.setState({
                         loggedIn: true
                          
                     });
-                    this.props.history.push("/profile/");
-                    window.location.reload();
                 }
             ).catch(err => {
                 // snackbar

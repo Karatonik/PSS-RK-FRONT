@@ -27,7 +27,7 @@ class UserList extends React.Component{
 
 
     findAllUsers(){
-        axios.get("https://pssrk2021-api.herokuapp.com/users/")
+        axios.get("http://localhost:8080/users/")
         .then(response=>response.data)
         .then((data)=>{
             this.setState({users: data})
@@ -36,7 +36,7 @@ class UserList extends React.Component{
       
     }
     deleteUser=(userId)=>{
-        axios.delete("https://pssrk2021-api.herokuapp.com/users/deleteUser/"+userId)
+        axios.delete("http://localhost:8080/users/deleteUser/"+userId)
         .then(response=>{
             if(response.data!=null){
                 this.setState({"show":true});
@@ -52,7 +52,7 @@ class UserList extends React.Component{
     };
 
     setUserAsAdmin = (userId)=>{
-        axios.put("https://pssrk2021-api.herokuapp.com/users/setadmin/"+localStorage.getItem('id')+"/"+userId)
+        axios.put("http://localhost:8080/users/setadmin/"+localStorage.getItem('id')+"/"+userId)
         .then(response=>{
             if(response.data!=null){
                 this.setState({
