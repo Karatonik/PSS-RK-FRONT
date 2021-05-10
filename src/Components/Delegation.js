@@ -1,16 +1,9 @@
 import React, {  } from 'react';
-import {Card,Form,Button,Col, Alert} from 'react-bootstrap'
+import {Card,Form,Button,Col} from 'react-bootstrap'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faPlusSquare, faSave,faUndo,faList,faEdit, faAtlas} from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import MyToast from './MyToast';
-import {
-    withGoogleMap,
-    withScriptjs,
-    GoogleMap,
-    DirectionsRenderer
-} from "react-google-maps";
-import form from 'react-validation/build/form';
   
 
 class Delegation extends React.Component{

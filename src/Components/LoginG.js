@@ -6,16 +6,6 @@ import { Redirect } from 'react-router-dom';
 
 
 
-const required = value => {
-    if (!value) {
-      return (
-        <div className="alert alert-danger" role="alert">
-          This field is required!
-        </div>
-      );
-    }
-  };
-
 export default class LoginGoogle extends Component {
     state = {
         errorMessage: '',
