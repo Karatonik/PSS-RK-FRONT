@@ -98,7 +98,7 @@ class Delegation extends React.Component{
             (result, status) => {
                 if (status === window.google.maps.DirectionsStatus.OK) {
                     console.log(result.routes[0].legs[0].distance.value);
-                    this.initialState.km =result.routes[0].legs[0].distance.value;
+                    this.initialState.km =result.routes[0].legs[0].distance.value/1000;
                     this.setState(this.initialState);
                 
                    //alert(result.routes[0].legs[0].distance.value + ' km')
